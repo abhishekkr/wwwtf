@@ -14,6 +14,7 @@ module Wwwtf
           last_modified.push headr['Last-Modified']
         end
         {
+          'page_urls'                  => page_urls,
           'total_count'                => page_urls.size,
           'cache_control%'             => cache_control_percent(cache_control),
           'expire_in_day%'             => expire_in_day_percent(cache_control),

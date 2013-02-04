@@ -19,5 +19,6 @@ module Wwwtf
           #{cache_stat['last_modified%']}% is aware of Last-Modified,
           #{lm_median_hrs}hrs. (i.e. #{lm_median_days} days) is L-M median
          "
+    puts "\tDependent URLs:\n\t#{cache_stat['page_urls'].join("\n\t")}\n" unless ENV['WWWTF_DEBUG'].nil?
   end
 end
