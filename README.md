@@ -1,6 +1,6 @@
-# Wwwtf
+# WWWTF
 
-TODO: Write a gem description
+World Wide Web's Trolls and Flaws
 
 ## Installation
 
@@ -18,7 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Cache is King like summary
+    $ wwwtf --cache-king $URL
 
 ## Contributing
 
