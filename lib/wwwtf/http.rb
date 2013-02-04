@@ -28,10 +28,11 @@ module Wwwtf
     end
 
     def self.fix_urls(base_url, src_string)
-      if src_string.match(/^http\:\/\//i)
+      http = base_url.scan(/^(https*)\:\/\//).flatten.join
+      if src_string.match(/^https*\:\/\//i)
         src_string
       elsif src_string.match(/^\/\//)
-        "http:#{src_string}"
+        "#{http}:#{src_string}"
       else
         File.join base_url, src_string
       end
