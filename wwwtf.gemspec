@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = Wwwtf::VERSION
   gem.authors       = ["abhishekkr"]
   gem.email         = ["abhikumar163@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{World Wide Web's Trolls and Flaws giving varied Trolls & Flaws analyzing the BAD WWW around.}
+  gem.summary       = %q{World Wide Web's Trolls and Flaws}
+  gem.homepage      = "https://github.com/abhishekkr/wwwtf"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
