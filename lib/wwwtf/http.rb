@@ -3,8 +3,13 @@
 module Wwwtf
   module HTTP
 
+    class << self
+      attr_accessor :curl_headers
+    end
+    @curl_headers = 'User Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, Linuxke Gecko) Chrome/22.0.1229.52 Safari/537.4'
+
     def self.headers(url)
-      hdrs = %x{curl -IkLs #{url}}
+      hdrs = %x{curl -IkLs -H #{curl_headers} #{url}}
       headr = {}
       hdr = hdrs.split("\r\n")
       hdr = hdr.collect{|h| {h.split(':')[0].strip => h.split(':')[1..-1].join.strip} }
@@ -13,7 +18,7 @@ module Wwwtf
     end
 
     def self.body(url)
-      %x{curl -kLs #{url}}
+      %x{curl -kLs -H #{curl_headers} #{url}}
     end
 
     def self.page_dependency(url)
