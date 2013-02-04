@@ -65,6 +65,7 @@ module Wwwtf
       def self.last_modified_median(last_modified)
         require 'time'
         last_modified   = last_modified.compact
+        return nil if last_modified.empty?
         last_mod_sorted = last_modified.each {|mod_time|
                             Time.parse(mod_time)
                           }.sort

@@ -10,7 +10,7 @@ module Wwwtf
 
   def self.cache_king(url)
     cache_stat = Wwwtf::Cache::King.stat url
-    lm_median_hrs = cache_stat['last_modified_hours_median']
+    lm_median_hrs = cache_stat['last_modified_hours_median'].to_i
     lm_median_days = lm_median_hrs / 24
     puts "#{url} has:
           #{cache_stat['total_count']} number of dependent content locations,
