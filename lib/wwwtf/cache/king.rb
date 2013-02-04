@@ -5,22 +5,26 @@ module Wwwtf
     module King
 
       def self.stat(url)
-        page_urls = Wwwtf::HTTP.page_dependency(url)
-        all_headers = headers(page_urls)
-        cache_control, last_modified = [], []
-        all_headers.each do |url, headr|
-          max_age = Wwwtf::Cache.cache_control_max_age(headr['Cache-Control'])
-          cache_control.push max_age
-          last_modified.push headr['Last-Modified']
+        begin
+          page_urls = Wwwtf::HTTP.page_dependency(url)
+          all_headers = headers(page_urls)
+          cache_control, last_modified = [], []
+          all_headers.each do |url, headr|
+            max_age = Wwwtf::Cache.cache_control_max_age(headr['Cache-Control'])
+            cache_control.push max_age
+            last_modified.push headr['Last-Modified']
+          end
+          {
+            'page_urls'                  => page_urls,
+            'total_count'                => page_urls.size,
+            'cache_control%'             => cache_control_percent(cache_control),
+            'expire_in_day%'             => expire_in_day_percent(cache_control),
+            'last_modified%'             => last_modified_percent(last_modified),
+            'last_modified_hours_median' => last_modified_median(last_modified)
+          }
+        rescue
+          raise "WWWTF Cache King failed in collecting statistic for #{url}." if url.nil?
         end
-        {
-          'page_urls'                  => page_urls,
-          'total_count'                => page_urls.size,
-          'cache_control%'             => cache_control_percent(cache_control),
-          'expire_in_day%'             => expire_in_day_percent(cache_control),
-          'last_modified%'             => last_modified_percent(last_modified),
-          'last_modified_hours_median' => last_modified_median(last_modified)
-        }
       end
 
       def self.headers(page_urls)
