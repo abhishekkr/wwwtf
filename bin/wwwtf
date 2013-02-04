@@ -4,7 +4,14 @@ $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 require 'arg0'
 require 'wwwtf'
 
+if %x{which curl}.empty?
+  puts 'Error: curl utility is \'currently\' required but not found in system path, fix it.'
+  puts 'Notice: Will change curl dependency to Ruby HTTP but there are few missing features in internal library, WIP.'
+  exit 1
+end
+
 cache_stats_for = Arg0::Console.value_for(['-ck', '--cache-king'])
 cache_stats_for.each do |url|
+  url = "http://#{url}" unless url.match(/^https*\:\/\//)
   Wwwtf.cache_king url
 end
