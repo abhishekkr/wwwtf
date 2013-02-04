@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 
+require 'arg0'
 require 'wwwtf'
 
-puts Wwwtf::Cache::King.stat ARGV[0]
+cache_stats_for = Arg0::Console.value_for(['-ck', '--cache-king'])
+cache_stats_for.each do |url|
+  Wwwtf.cache_king url
+end

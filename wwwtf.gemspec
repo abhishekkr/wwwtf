@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.executables   = %w( wwwtf )
 
   gem.add_runtime_dependency 'xml-motor', '>= 0.1.6'
+  gem.add_runtime_dependency 'arg0', '>= 0.0.2'
 end
