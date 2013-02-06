@@ -21,6 +21,9 @@ Or install it yourself as:
 Cache is King like summary
     $ wwwtf --cache-king $URL
 
+    in Debug mode, let's you know of all dependent URLs
+    $ WWWTF_DEBUG=on bin/wwwtf --cache-king $URL
+
 ## Contributing
 
 1. Fork it
