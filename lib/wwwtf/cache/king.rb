@@ -23,7 +23,8 @@ module Wwwtf
             'last_modified_hours_median' => last_modified_median(last_modified)
           }
         rescue
-          raise "WWWTF Cache King failed in collecting statistic for #{url}." if url.nil?
+          puts "WWWTF Cache King failed in collecting statistic for #{url}."
+          exit 1
         end
       end
 
