@@ -34,13 +34,20 @@ module Wwwtf
     end
 
     def self.fix_urls(base_url, src_string)
-      http = base_url.scan(/^(https*)\:\/\//).flatten.join
-      if src_string.match(/^https*\:\/\//i)
-        src_string
-      elsif src_string.match(/^\/\//)
-        "#{http}:#{src_string}"
-      else
-        File.join base_url, src_string
+      begin
+        src_string = src_string.unescape.strip
+        src_string = src_string[1..-2] if src_string.match(/^\".*\"$/)
+        http = base_url.scan(/^(https*)\:\/\//).flatten.join
+        if src_string.match(/^https*\:\/\//i)
+          src_string
+        elsif src_string.match(/^\/\//)
+          "#{http}:#{src_string}"
+        else
+          File.join base_url, src_string
+        end
+      rescue
+        puts "ERR: #{src_string}"
+        return nil
       end
     end
   end
